@@ -143,8 +143,8 @@ RSpec.describe AddressBook do
 
   end
   #iterative search
-  # describe "This tests iterative search" do
-  #
-  # end
+  describe "This tests iterative search" do
+    it
+  end
 
 end
