@@ -9,6 +9,11 @@ RSpec.describe AddressBook do
     expect(entry.email).to eq expected_email
   end
 
+  def iterative_search_check(name)
+    book.import_from_csv("entries.csv")
+    book.iterative_search(name)
+  end
+
   describe "attributes" do
     it "responds to entries" do
       expect(book).to respond_to(:entries)
@@ -144,7 +149,46 @@ RSpec.describe AddressBook do
   end
   #iterative search
   describe "This tests iterative search" do
-    it
+    it "searches for non existent entry" do
+      expect(iterative_search_check("Dan")).to be_nil
+    end
+
+    it "searches AddressBook for Bill" do
+      entry = iterative_search_check("Bill")
+      expect(entry).to be_a Entry
+      check_entry(entry, "Bill", "555-555-4854", "bill@blocmail.com")
+    end
+
+    it "searches AddressBook for Bob" do
+      entry = iterative_search_check("Bob")
+      expect(entry).to be_a Entry
+      check_entry(entry, "Bob", "555-555-5415", "bob@blocmail.com")
+    end
+
+    it "searches AddressBook for Joe" do
+      entry = iterative_search_check("Joe")
+      expect(entry).to be_a Entry
+      check_entry(entry, "Joe", "555-555-3660", "joe@blocmail.com")
+    end
+
+    it "searches AddressBook for Sally" do
+      entry = iterative_search_check("Sally")
+      expect(entry).to be_a Entry
+      check_entry(entry, "Sally", "555-555-4646", "sally@blocmail.com")
+    end
+
+    it "searches AddressBook for Sussie" do
+      entry = iterative_search_check("Sussie")
+      expect(entry).to be_a Entry
+      check_entry(entry, "Sussie", "555-555-2036", "sussie@blocmail.com")
+    end
+
+    it "searches AddressBook for similar names Billy" do
+      book.import_from_csv("entries.csv")
+      entry = book.binary_search("Billy")
+      expect(entry).to be_nil
+    end
+
   end
 
 end
