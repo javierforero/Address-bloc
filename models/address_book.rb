@@ -19,7 +19,7 @@ class AddressBook
   end
 
   def remove_entry(name, phone_number, email)
-       # find matching entry and delete
+
     entries.each_with_index do |entry, index|
       if entry.name == name && entry.phone_number == phone_number && entry.email == email
         entries.delete_at(index)
@@ -71,6 +71,6 @@ class AddressBook
      end
    end
    return nil
-  end  
+  end
 
 end
